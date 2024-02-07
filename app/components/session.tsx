@@ -14,7 +14,7 @@ const Session = () => {
         <div>
             {
                 session && (
-                    <div className='flex m-auto'>
+                    <div className='flex m-auto items-center justify-center py-2'>
                         <div className='w-[70px] h-[70px] rounded-[50%] overflow-hidden items-center'>
                             <img src={session.user?.image!} alt="profile" className='w-full h-full bg-cover items-center' />
                         </div>

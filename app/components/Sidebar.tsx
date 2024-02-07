@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
 import Image from "next/image";
-import logo from '@/app/images/stringo-logo-platform.png';
 import { GoHomeFill } from "react-icons/go";
 import { FaCompass } from "react-icons/fa";
 import { RiPlayListFill } from "react-icons/ri";
@@ -11,11 +10,11 @@ import { IoMusicalNotes } from "react-icons/io5";
 import { BiUserVoice } from "react-icons/bi";
 import styles from '@/app/styles/motion.module.css';
 
+
+
 const Sidebar = () => {
     return (
-          <div className="p-6 flex flex-col m-auto z-10 gap-5">
-          <Image src={logo} width={200} height={200} alt={'logo'} className="m-auto" />
-          <input type="text" name="text" className={styles.input} placeholder="Pesquise uma música" title="search"></input>
+          <div className="p-5 flex flex-col z-10 gap-5 justify-items-start">
           <h3 className="text-white text-sm">Dashboard</h3>
           <div className="flex w-full text-center items-center">
           <GoHomeFill className="text-white text-2xl"/>
