@@ -11,6 +11,19 @@ import Player from "../components/Player";
 import Image from 'next/image'
 import SearchProvider from "../components/SearchProvider";
 
+interface Music {
+  id?: any,
+  name?: any,
+  album: {
+    images?: any
+  }
+}
+
+type Params = {
+  song: any,
+}
+
+
 export default function Home() {
   const { data: session, status } = useSession();
   console.log("Status: ", status)
@@ -31,24 +44,11 @@ export default function Home() {
         .then(res => res.json())
         .then(data => setToken(data.access_token))
     }, [])
-  const musics = [
-    {
-        name: 'Song 1',
-        artist: 'Artist',
-    },
-    {
-        name: 'Song 2',
-        artist: 'Artist',
-    },
-    {
-        name: 'Song 3',
-        artist: 'Artist',
-    },
-]
+  
   const [isSearching, setIsSearching] = useState(false);
   const [artist, setArtist] = useState('');
   const [music, setMusic] = useState([]);
-  const [song, setSong] = useState();
+  const [song, setSong] = useState<String>('');
 
   const setSearching = async (e:any) => {
     const { value } = e.target;
@@ -88,7 +88,7 @@ export default function Home() {
             <div className={`grid grid-cols-4 h-[500px] w-[804px] overflow-y-scroll ${styles.scrollbar}`}>
               <h1 className='text-white text-2xl font-bold'> Results </h1>
             {
-                music.map((music) => (
+                music.map((music: Music) => (
                     <div className="grid grid-cols-8 p-2 justify-start items-start" key={music.id} onClick={() => setSong(music.id)}>
                         <SearchProvider music_name={music.name} background={music.album.images[0].url}/>
                     </div>  
@@ -114,11 +114,7 @@ export default function Home() {
             </div>
             <div className="z-10 overflow-auto h-[210px]">
               {
-                musics.map((music, index) => (
-                      <div key={index} className="z-10 overflow-auto">
-                      <Played music={music.name} artist={music.artist} />
-                      </div>
-                ))
+                
               }
             </div>
             <div className="block w-[160px] h-[180px] p-10 mt-1 justify-center item-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex flex-col m-auto">
