@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body><Providers>{children}</Providers></body>
+      <body className='h-screen min-h-screen w-screen'><Providers>{children}</Providers></body>
     </html>
   );
 }
