@@ -1,38 +1,46 @@
-"use client";
+'use client';
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import logo from '@/app/images/stringo-logo-platform.png';
 import styles from '@/app/styles/motion.module.css';
-import Session from "../components/session";
-import Sidebar from "../components/Sidebar";
-import Main from "../components/Main";
-import Played from "../components/Played";
-import Player from "../components/Player";
+import Session from "@/app/components/session";
+import Sidebar from "@/app/components/Sidebar";
+import Main from "@/app/components/Main";
+import Played from "@/app/components/Played";
+import Player from "@/app/components/Player";
 import Image from 'next/image'
-import SearchProvider from "../components/SearchProvider";
+import SearchProvider from "@/app/components/SearchProvider";
 import Utopia from '@/app/images/utopia.jpg'
-import { addToRecentPlayed } from "../actions/recentPlayed";
-import { RecentPlayed } from "../actions/recentPlayed";
+import Artists from "@/app/components/Artists";
+import { RecentPlayed } from "@/app/actions/recentPlayed";
+import { addToRecentPlayed } from "@/app/actions/recentPlayed";
+import Discover from "@/app/components/Discover";
+import PlayListAcess from "@/app/components/PlayListAcess";
 
-interface Music {
-  id?: any,
-  name?: any,
-  album: {
-    images?: any,
-    artists? :any
-  }
+type Props = {
+    params : {
+        playlistid: string
+    }
 }
 
+interface Music {
+    id?: any,
+    name?: any,
+    album: {
+        images?: any,
+        artists? :any
+    }
+  }
 
-export default function Home() {
-  const { data: session, status } = useSession();
-  console.log("Status: ", status)
-  
-  const [token, setToken] = useState('');
-  const client_id = '0c255169738f4ca7ba125fa1b269a4ff'
-  const client_secret = 'b5153c414fc7460babb61af0cd3f925b'
+const Page = ({params}: Props) => {
+    
+    const { data: session, status } = useSession();
+    console.log("Status: ", status)
+    const [token, setToken] = useState('');
+    const client_id = '0c255169738f4ca7ba125fa1b269a4ff'
+    const client_secret = 'b5153c414fc7460babb61af0cd3f925b'
 
-  useEffect(() => {
+    useEffect(() => {
     var authParam = {
         method: 'POST',
         headers: {
@@ -44,52 +52,52 @@ export default function Home() {
         .then(res => res.json())
         .then(data => setToken(data.access_token))
     }, [])
-  
-  const [isSearching, setIsSearching] = useState(false);
-  const [music, setMusic] = useState([]);
-  const [song, setSong] = useState('');
-  const [recentPlayed, setRecentPlayed] = useState<Music[]>([]);
 
-  const setSearching = async (e:any) => {
-    const { value } = e.target;
-    setIsSearching(value !== '');
-    console.log(value);
-    if(value){
-      try{
-        const artistParamter = {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-          },
+    const [isSearching, setIsSearching] = useState(false);
+    const [music, setMusic] = useState([]);
+    const [song, setSong] = useState('');
+    const [recentPlayed, setRecentPlayed] = useState<Music[]>([]);
+
+    const setSearching = async (e:any) => {
+        const { value } = e.target;
+        setIsSearching(value !== '');
+        console.log(value);
+        if(value){
+            try{
+                const artistParamter = {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
         }
-        var musicID = await fetch('https://api.spotify.com/v1/search?q=' + value + '&type=track', artistParamter).then(res => res.json()).then(data => setMusic(data.tracks.items));
-        console.log(music);
-      }catch(error){
-        console.log('Erro ao obter Musica', error);
-      }
+            var musicID = await fetch('https://api.spotify.com/v1/search?q=' + value + '&type=album', artistParamter).then(res => res.json()).then(data => setMusic(data.tracks.items));
+            console.log(music);
+            }catch(error){
+                console.log('Erro ao obter Musica', error);
+            }
+        }
     }
-  }
 
-  const AddMusic = (param : Music) => {
+    const AddMusic = (param : Music) => {
     setSong(param.id);
     if(song){
-      console.log(song);
+        console.log(song);
     }
     const updatedRecentPlayedItem = {
-      name: param.name,
-      id: param.id,
-      album: param.album,
-      artist: param.album?.artists?.[0]?.name
+        name: param.name,
+        id: param.id,
+        album: param.album,
+        artist: param.album?.artists?.[0]?.name
     };
     const updateRecentPlayed = [...recentPlayed, updatedRecentPlayedItem];
     console.log(updateRecentPlayed);
     setRecentPlayed(updateRecentPlayed);
     addToRecentPlayed(updatedRecentPlayedItem);
-  }
-  
-  return (
-    <main className="flex space-x-2">
+    }
+
+    return (
+        <main className="flex space-x-2">
         <video autoPlay muted loop className={styles.video}	>
                 <source src={'video/motion.mp4'} type="video/mp4"/>
         </video>
@@ -112,7 +120,7 @@ export default function Home() {
             }
         </div>
           ): (
-            <Main token={token}/>
+            <PlayListAcess playlistid={params.playlistid}/>
           )}      
           <Player musicID={song}/>     
         </div>
@@ -140,6 +148,8 @@ export default function Home() {
             </div>
             <Image src={Utopia} height={400} width={400} alt={'utopia'} className="mt-[315px] mr-[300px] rounded-2xl z-10 ml-auto" />
         </div>
-    </main>
-  )
+    </main> 
+    )
 }
+
+export default Page

@@ -5,6 +5,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Stringo",
   description: "Criado por @oiRhyan",
+  icons: {
+    icon : ['/favicon.ico?v=4']
+  }
 };
 
 export default function RootLayout({

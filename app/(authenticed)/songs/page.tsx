@@ -1,38 +1,41 @@
-"use client";
+'use client';
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import logo from '@/app/images/stringo-logo-platform.png';
 import styles from '@/app/styles/motion.module.css';
-import Session from "../components/session";
-import Sidebar from "../components/Sidebar";
-import Main from "../components/Main";
-import Played from "../components/Played";
-import Player from "../components/Player";
+import Session from "@/app/components/session";
+import Sidebar from "@/app/components/Sidebar";
+import Played from "@/app/components/Played";
+import Player from "@/app/components/Player";
 import Image from 'next/image'
-import SearchProvider from "../components/SearchProvider";
+import SearchProvider from "@/app/components/SearchProvider";
 import Utopia from '@/app/images/utopia.jpg'
-import { addToRecentPlayed } from "../actions/recentPlayed";
-import { RecentPlayed } from "../actions/recentPlayed";
+import { RecentPlayed } from "@/app/actions/recentPlayed";
+import { addToRecentPlayed } from "@/app/actions/recentPlayed";
+import Songs from "@/app/components/Songs";
 
-interface Music {
-  id?: any,
-  name?: any,
-  album: {
-    images?: any,
-    artists? :any
-  }
+
+interface Props {
 }
 
+interface Music {
+    id?: any,
+    name?: any,
+    album: {
+        images?: any,
+        artists? :any
+    }
+  }
 
-export default function Home() {
-  const { data: session, status } = useSession();
-  console.log("Status: ", status)
-  
-  const [token, setToken] = useState('');
-  const client_id = '0c255169738f4ca7ba125fa1b269a4ff'
-  const client_secret = 'b5153c414fc7460babb61af0cd3f925b'
+const Page = (props: Props) => {
+      
+    const { data: session, status } = useSession();
+    console.log("Status: ", status)
+    const [token, setToken] = useState('');
+    const client_id = '0c255169738f4ca7ba125fa1b269a4ff'
+    const client_secret = 'b5153c414fc7460babb61af0cd3f925b'
 
-  useEffect(() => {
+    useEffect(() => {
     var authParam = {
         method: 'POST',
         headers: {
@@ -63,32 +66,32 @@ export default function Home() {
             'Authorization': 'Bearer ' + token
           },
         }
-        var musicID = await fetch('https://api.spotify.com/v1/search?q=' + value + '&type=track', artistParamter).then(res => res.json()).then(data => setMusic(data.tracks.items));
-        console.log(music);
-      }catch(error){
-        console.log('Erro ao obter Musica', error);
-      }
+            var musicID = await fetch('https://api.spotify.com/v1/search?q=' + value + '&type=track', artistParamter).then(res => res.json()).then(data => setMusic(data.tracks.items));
+            console.log(music);
+            }catch(error){
+                console.log('Erro ao obter Musica', error);
+            }
+        }
     }
-  }
 
-  const AddMusic = (param : Music) => {
+    const AddMusic = (param : Music) => {
     setSong(param.id);
     if(song){
-      console.log(song);
+        console.log(song);
     }
     const updatedRecentPlayedItem = {
-      name: param.name,
-      id: param.id,
-      album: param.album,
-      artist: param.album?.artists?.[0]?.name
+        name: param.name,
+        id: param.id,
+        album: param.album,
+        artist: param.album?.artists?.[0]?.name
     };
     const updateRecentPlayed = [...recentPlayed, updatedRecentPlayedItem];
     console.log(updateRecentPlayed);
     setRecentPlayed(updateRecentPlayed);
     addToRecentPlayed(updatedRecentPlayedItem);
-  }
-  
-  return (
+    }
+
+    return (
     <main className="flex space-x-2">
         <video autoPlay muted loop className={styles.video}	>
                 <source src={'video/motion.mp4'} type="video/mp4"/>
@@ -112,7 +115,7 @@ export default function Home() {
             }
         </div>
           ): (
-            <Main token={token}/>
+            <Songs/>
           )}      
           <Player musicID={song}/>     
         </div>
@@ -129,7 +132,7 @@ export default function Home() {
               <button type="button" className="text-white bg-[#121212] focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">MPB</button>
             </div>
             <div className={`absolute overflow-y-scroll h-[300px] w-[300px] ${styles.scrollbar}`}>
-              <h1 className="text-white font-bold text-xl text-left"> Just Played </h1>
+            <h1 className="text-white font-bold text-xl text-left"> Just Played </h1>
                 {
                   RecentPlayed.map((artist, index) => (
                     <div key={index} className="z-20">
@@ -140,6 +143,8 @@ export default function Home() {
             </div>
             <Image src={Utopia} height={400} width={400} alt={'utopia'} className="mt-[315px] mr-[300px] rounded-2xl z-10 ml-auto" />
         </div>
-    </main>
-  )
-}
+    </main>     
+        )
+    }
+
+export default Page
