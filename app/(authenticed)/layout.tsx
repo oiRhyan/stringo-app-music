@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className='min-h-screen flex flex-col overflow-hidden'><Providers>{children}</Providers></body>
+      <body><Providers>{children}</Providers></body>
     </html>
   );
 }
