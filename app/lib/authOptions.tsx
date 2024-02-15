@@ -8,5 +8,5 @@ export const authOptions : NextAuthOptions = {
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string
         }),
     ],
-    secret: process.env.NEXTAUTH_SECRET as string,
+    secret: '0TYG8BrCIApX8fiwOKO3HaG4z7vIcBbOF1WliBjgC+c=',
 };
