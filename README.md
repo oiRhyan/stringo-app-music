@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <img src="https://stringo.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fstringo-logo-platform.8aa72fba.png&w=256&q=75" alt="Logo">
+</div>
 
-## Getting Started
 
-First, run the development server:
+# Stringo App Music
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Bem vindo a documentação do Stringo Web Music App! Um web app conceitual com foco na sctreaming de musicas integrado ao Spotify!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tecnologias Utilizadas
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[![My Skills](https://skillicons.dev/icons?i=react,nextjs,tailwind,prisma,typescript=7)](https://skillicons.dev)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Recursos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Reprodução de Músicas em tempo real
+- Sistema de busca de músicas
+- Atualização em tempo real das principais playlists mais tocadas da plataforma Spotify
+- Sincronização e autenticação com Spotify
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Reproduza suas Músicas Favoritas!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+https://github.com/oiRhyan/stringo-app-music/assets/123249383/fd0e5e72-c88d-478c-80a4-649e9187c957
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Desenvolvimento
+Este documento descreve a primeira etapa do projeto, que consiste na integração da API do Spotify para a validação do usuário e a inicialização de sua conta no aplicativo.
+
+## Integração da API do Spotify
+Para integrar a API do Spotify em sua aplicação, você pode encontrar informações detalhadas na documentação oficial em: https://developer.spotify.com/documentation/web-api
+
+## Funcionalidades
+Após a sessão ser criada, o usuário terá acesso à aplicação em tempo real, utilizando os principais recursos de busca e reprodução de músicas. Isso foi possível graças aos métodos da API do Spotify, que foram adaptados para a versão atual do NextJS.
+
+## Utilização de React Hook
+Utilizando o React Hook, foi possível capturar os IDs das principais músicas requisitadas pelo usuário e integrá-las de forma dinâmica ao Player fornecido pelo próprio Spotify. Isso proporciona uma experiência mais interativa e imersiva ao usuário.
+
+## Renderização Dinâmica em Tempo Real
+A experiência do usuário nesta aplicação é enriquecida pela renderização dinâmica em tempo real de todo o conteúdo, possibilitada pela integração com a API do Spotify. A utilização das Fetch APIs do JavaScript permitiu uma implementação prática e intuitiva, garantindo uma navegação fluida e ágil.
+
+## Acompanhe o desenvolvimento desta e outras aplicações em
+<p>
+  <a href="https://www.linkedin.com/in/rhyan-araujo-chaves/">
+    <img src="https://skillicons.dev/icons?i=linkedin" />
+  </a>
+</p>
+
+<h1 align="center">
+   Desenvolvido por Rhyan Araujo Chaves @2024
+</h1>
+
+
+
+
