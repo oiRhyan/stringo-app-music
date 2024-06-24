@@ -7,6 +7,8 @@
 
 Bem vindo a documentação do Stringo Web Music App! Um web app conceitual com foco na sctreaming de musicas integrado ao Spotify!
 
+Você pode conferir está aplicação em tempo real no site : https://stringo.vercel.app/
+
 
 ## Tecnologias Utilizadas
 
