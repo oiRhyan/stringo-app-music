@@ -10,7 +10,7 @@ Bem vindo a documentação do Stringo Web Music App! Um web app conceitual com f
 
 ## Tecnologias Utilizadas
 
-[![My Skills](https://skillicons.dev/icons?i=react,nextjs,tailwind,prisma,typescript=7)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=react,nextjs,tailwind,typescript=7)](https://skillicons.dev)
 
 
 ## Recursos
