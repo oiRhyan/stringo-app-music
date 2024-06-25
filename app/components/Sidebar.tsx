@@ -49,7 +49,7 @@ const Sidebar = () => {
                 <h1 className="text-white font-sans font-medium ml-2 text-center"> Songs </h1> 
             </div>
             </Link>
-            <Link href={'https://full-stack-rhyan.netlify.app/'} target='_blank'>
+            <Link href={'https://rhyan-android-dev.vercel.app/pages/codes'} target='_blank'>
             <div className="flex w-full text-center items-center">
             <TbUserCode className="text-white text-2xl"/>
             <h1 className="text-white font-sans font-medium ml-2 text-center"> Creator </h1> 
